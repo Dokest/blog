@@ -1,0 +1,3 @@
+[submodule "Nobuk"]
+	path = Nobuk
+	url = https://github.com/Dokest/Nobuk.git
