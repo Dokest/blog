@@ -1,5 +1,5 @@
 # GameDev resources
-> I mainly use Unreal Engine and Godot, so the resources will centered around those engines.
+> I mainly use Unreal Engine and Godot, so the resources will be centered around those engines.
 > There might also be some useful game design resources.
 
 ## Unreal Engine
@@ -7,7 +7,7 @@
 
 ### Gameplay Ability System (GAS)
 - [The bible / Tranek docs](https://github.com/tranek/GASDocumentation)
-Contains all the documentation possible and a example project. Really useful to check specific GAS functionality.
+Contains all the documentation possible and an example project. Really useful to check specific GAS functionality.
 - [A Gameplay Framework with GAS based on Risk of Rain 2](https://www.vitorcantao.com/post/gas-gameplay-framework/)
 Guide with examples of custom `GameplayAbility` and dynamic damage pipeline. Contains some examples of abilities of **Risk of Rain 2**.
 - [Creating your own Gameplay Effect Context](https://www.thegames.dev/?p=62)
