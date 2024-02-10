@@ -1121,6 +1121,10 @@ video {
   width: 25px;
 }
 
+.flex-col {
+  flex-direction: column;
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -1316,6 +1320,10 @@ code:not([class]) {
 
   .md\:min-w-\[40\%\] {
     min-width: 40%;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
   }
 
   .md\:px-0 {
