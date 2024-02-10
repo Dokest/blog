@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.prose h1, .prose h2, .prose h3 {
+	@apply text-neutral-200;
+}
+
+.prose h1 {
+	@apply text-center;
+}
+
+.prose strong {
+	@apply text-neutral-200;
+}
+
+.center-container {
+	margin: 0 auto;
+	width: 100%;
+}
+
+.prose a {
+	@apply text-sky-600 hover:text-sky-700;
+}
+
+.prose blockquote {
+	@apply text-neutral-400;
+}
+
+.link {
+	@apply text-sky-600 underline hover:text-sky-700;
+}
+
+.code-block {
+	@apply bg-neutral-800 px-4 py-1 rounded;
+}
+
+.code-block .markdown-it-code-copy {
+	@apply absolute top-1.5 right-2 fill-neutral-500 hover:fill-neutral-400 focus:fill-green-700;
+}
+
+code:not([class]) {
+	@apply bg-neutral-700 px-1 py-0.5 rounded;
+}

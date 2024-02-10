@@ -1,0 +1,7 @@
+# Deno files
+deno.lock
+
+# IDE files
+.vscode/
+
+tailwindcss
