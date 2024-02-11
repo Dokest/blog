@@ -42,3 +42,16 @@
 code:not([class]) {
 	@apply bg-neutral-700 px-1 py-0.5 rounded;
 }
+
+.post-tag {
+	@apply px-1 py-0.5 text-neutral-200 font-semibold rounded text-sm;
+}
+
+.web-tag {
+	@apply bg-indigo-800;
+}
+
+.post-date {
+	@apply text-neutral-500 text-sm;
+}
+
