@@ -1,22 +1,26 @@
 {
-  "tasks": {
-    "dev": "deno run --check --watch --allow-net --allow-read=\"./\" src/main.ts",
-    "md": "deno run -A commands/compile-markdown.ts"
-  },
-  "importMap": "./import_map.json",
-  "lint": {
-    "rules": {
-      "exclude": [
-        "no-explicit-any"
-      ]
-    }
-  },
-  "deploy": {
-    "project": "82c5a00b-5c7a-473c-a486-c8c9de30b2af",
-    "exclude": [
-      "**/node_modules"
-    ],
-    "include": [],
-    "entrypoint": "src/main.ts"
-  }
+	"tasks": {
+		"dev": "deno run --check --watch --allow-net --allow-read=\"./\" src/main.ts",
+		"md": "deno run --check -A commands/compile-markdown.ts"
+	},
+	"importMap": "./import_map.json",
+	"lint": {
+		"rules": {
+			"exclude": [
+				"no-explicit-any"
+			]
+		}
+	},
+	"compilerOptions": {
+		"strict": true,
+		"strictNullChecks": true
+	},
+	"deploy": {
+		"project": "82c5a00b-5c7a-473c-a486-c8c9de30b2af",
+		"exclude": [
+			"**/node_modules"
+		],
+		"include": [],
+		"entrypoint": "src/main.ts"
+	}
 }
