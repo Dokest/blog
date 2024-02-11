@@ -1,5 +1,6 @@
-import { NobukApp, HttpComponent, RequestContext } from "$src/deps.ts";
+import { NobukApp, HttpComponent, RequestContext, ErrorHandlingMiddleware } from "$src/deps.ts";
 import { PostModule } from "$modules/posts/Post.module.ts";
+import { LogMiddleware } from "$src/middlewares/LogMiddleware.ts";
 
 
 export const modules = [
@@ -12,7 +13,10 @@ if (import.meta.main) {
 
 	const app = new NobukApp();
 
-	const httpComponent = new HttpComponent([]);
+	const httpComponent = new HttpComponent([
+		ErrorHandlingMiddleware,
+		LogMiddleware,
+	]);
 
 	app.addComponents([
 		httpComponent,
