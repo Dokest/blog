@@ -7,7 +7,6 @@ import { compileTailwind } from "./utils/tailwind.ts";
 const POST_PATH = "web/posts/";
 const HTML_TEMPLATE = "web/html/html_template.html";
 const POST_OUTPUT_PATH = "public/pages/";
-const RESOURCES_PATH = "public/_resources";
 
 
 type MarkdownFile = { path: string, name: string };
@@ -38,35 +37,17 @@ async function getMarkdownPathsInDir(dir: string): Promise<MarkdownFile[]> {
 	return markdownFiles;
 }
 
-async function compileAll(): Promise<void> {
+async function compileAllMarkdownFiles(): Promise<void> {
 	const files = await getMarkdownPathsInDir(POST_PATH);
 	const htmlTemplate = getHtmlTemplate();
 
 	for (const file of files) {
 		handleMarkdownFile(`${file.path}.md`, htmlTemplate);
-		// const text = compileFile(`${file.path}.md`);
-
-		// const dirPath = file.path.split("/");
-		// const fileName = dirPath.pop();
-		// const dirPathString = dirPath.join("/").replace("/web", "/");
-
-		// const replacedContents = htmlTemplate.replace("{{ POST_CONTENT }}", text);
-
-		// Deno.mkdirSync(`${POST_OUTPUT_PATH}${dirPathString}`, { recursive: true });
-		// Deno.writeTextFileSync(`${POST_OUTPUT_PATH}${dirPathString}${fileName}.html`, replacedContents, { create: true });
 	}
 }
 
 
 export async function watchCompile() {
-	// const watcher = Deno.watchFs("./posts");
-
-	// for await (const event of watcher) {
-	// 	event.paths.forEach((path) => {
-	// 		debounce(() => handleWatchEvent(path, template), 200);
-	// 	});
-	// }
-
 	await Array.fromAsync(
 		Deno.watchFs(["./web"]),
 		debounce(async (event) => {
@@ -99,18 +80,18 @@ async function handleWatchEvent(path: string, htmlTemplate: string): Promise<voi
 	if (path.endsWith(".md")) {
 		handleMarkdownFile(path, htmlTemplate);
 	} else if (path.endsWith(".html")) {
-		await compileAll();
+		await compileAllMarkdownFiles();
 	}
 }
 
 
 if (Deno.args.includes("--watch")) {
+	await compileAllMarkdownFiles();
+
 	console.log('Watching for changes...');
 
 	await watchCompile();
 } else {
-	await compileAll();
+	await compileAllMarkdownFiles();
 	await compileTailwind();
 }
-
-

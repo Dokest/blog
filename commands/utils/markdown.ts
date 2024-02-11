@@ -1,5 +1,4 @@
-import { markdownItCopy } from "$src/deps.ts";
-import { MarkdownIt, markdownitHighlight, mila } from "$src/deps.ts";
+import { MarkdownIt, markdownitHighlight, mila, markdownItAttrs } from "$src/deps.ts";
 
 const md = new MarkdownIt({
 	html: true,
@@ -20,7 +19,8 @@ const md = new MarkdownIt({
 	.use((md, options) => {
 		md.renderer.rules.code_block = renderCode(md.renderer.rules.code_block, options);
 		md.renderer.rules.fence = renderCode(md.renderer.rules.fence, options);
-	}, {});
+	}, {})
+	.use(markdownItAttrs);
 
 function renderCode(origRule: any, options: any) {
 	return (...args: any[]) => {
