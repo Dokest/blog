@@ -14,7 +14,8 @@ import MarkdownIt from "npm:markdown-it";
 export * as markdownitHighlight from "npm:markdown-it-highlightjs";
 import mila from "npm:markdown-it-link-attributes";
 import markdownItCopy from "npm:markdown-it-code-copy";
-export { MarkdownIt, mila, markdownItCopy };
+import markdownItAttrs from "npm:markdown-it-attrs";
+export { MarkdownIt, mila, markdownItCopy, markdownItAttrs };
 
 // File handling
 import mime from "npm:mime/lite";
@@ -24,3 +25,5 @@ export { mime };
 export { debounce } from "https://deno.land/std@0.215.0/async/debounce.ts";
 export { walk } from "https://deno.land/std@0.215.0/fs/walk.ts";
 export { relative } from "https://deno.land/std@0.215.0/path/relative.ts";
+import * as log from "https://deno.land/std@0.215.0/log/mod.ts";
+export { log };
