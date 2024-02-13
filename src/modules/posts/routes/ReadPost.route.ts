@@ -1,5 +1,5 @@
 import { MoldOutput, object, string, ValidatedRoute, RouteBodyType, OutputContentType } from "$src/deps.ts";
-import { GetPostFromFilesystem } from "$src/modules/posts/actions/GetPostFromFilesystem.ts";
+import { GetPublicFileStream } from "$src/modules/posts/actions/GetPublicFileStream.ts";
 
 
 export class ReadPostRoute extends ValidatedRoute {
@@ -11,10 +11,12 @@ export class ReadPostRoute extends ValidatedRoute {
 		"_": string(),
 	});
 
-	readonly getPostFromFilesystem = this.dependsOn(GetPostFromFilesystem);
+	readonly getPublicFileStream = this.dependsOn(GetPublicFileStream);
 
 
-	execute(input: MoldOutput<this["input"]>): Promise<string> {
-		return this.getPostFromFilesystem.execute(input._);
+	async execute(input: MoldOutput<this["input"]>): Promise<ReadableStream<Uint8Array>> {
+		const postStream = await this.getPublicFileStream.getPost(input._);
+
+		return postStream.readable;
 	}
 }

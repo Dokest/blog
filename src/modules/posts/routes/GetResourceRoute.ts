@@ -1,13 +1,14 @@
 import { mime } from "$src/deps.ts";
 import { Route } from "$src/deps.ts";
-import { abort } from "@nobuk/helpers/mod.ts";
+import { GetPublicFileStream } from "$src/modules/posts/actions/GetPublicFileStream.ts";
 
 
 export class GetResourceRoute extends Route {
-	async handle(request: Request, routeParams?: Record<string, unknown>): Promise<Response> {
-		const fileContents = await Deno.readFile(`public/_resources/${routeParams!["_"]}`);
+	private readonly getPublicFileStream = this.dependsOn(GetPublicFileStream);
 
-		const file = await Deno.open(`public/_resources/${routeParams!["_"]}`);
+
+	async handle(request: Request, routeParams?: Record<string, unknown>): Promise<Response> {
+		const file = await this.getPublicFileStream.getFile(`_resources/${routeParams!["_"]}`);
 
 		return new Response(file.readable, {
 			headers: {
@@ -15,6 +16,7 @@ export class GetResourceRoute extends Route {
 			},
 		});
 	}
+
 
 	private getFileContentType(path: string): string {
 		return mime.getType(path) ?? "text/plain";

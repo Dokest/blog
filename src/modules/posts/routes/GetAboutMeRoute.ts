@@ -1,5 +1,5 @@
-import { object, string, ValidatedRoute, RouteBodyType, OutputContentType } from "$src/deps.ts";
-import { GetPostFromFilesystem } from "$src/modules/posts/actions/GetPostFromFilesystem.ts";
+import { object, ValidatedRoute, RouteBodyType, OutputContentType } from "$src/deps.ts";
+import { GetPublicFileStream } from "$src/modules/posts/actions/GetPublicFileStream.ts";
 
 
 export class GetAboutMeRoute extends ValidatedRoute {
@@ -9,10 +9,12 @@ export class GetAboutMeRoute extends ValidatedRoute {
 
 	override input = object({});
 
-	readonly getPostFromFilesystem = this.dependsOn(GetPostFromFilesystem);
+	readonly getPublicFileStream = this.dependsOn(GetPublicFileStream);
 
 
-	execute(): Promise<string> {
-		return this.getPostFromFilesystem.execute("aboutme");
+	async execute(): Promise<ReadableStream<Uint8Array>> {
+		const postStream = await this.getPublicFileStream.getPost("aboutme");
+
+		return postStream.readable;
 	}
 }
